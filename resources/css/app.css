@@ -5,3 +5,7 @@
 hr {
     padding: 10px;
 }
+
+td, th {
+    padding: 5px;
+}

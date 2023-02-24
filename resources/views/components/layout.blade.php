@@ -8,18 +8,21 @@
     <title>Sistem Jadwal</title>
 </head>
 <body>
-    <h1>Sistem Jadwal</h1>
-    <div>
-        <a href="/">Home</a>
-        <a href="/jadwal">Jadwal</a>
-        <a href="/user">User</a>
-    </div>
-    @if ($errors)
-        <div class="text-red-500">
-            {{$errors}}
+    <div class="bg-slate-100 p-2">
+        <h1 class="flex justify-center text-3xl font-bold">Sistem Jadwal</h1>
+        <div class="flex justify-center gap-1">
+            <a href="/" class="hover:underline hover:text-blue-600 p-1 rounded bg-teal-200">Home</a>
+            <a href="/jadwal" class="hover:underline hover:text-blue-600 p-1 rounded bg-teal-200">Jadwal</a>
+            <a href="/user" class="hover:underline hover:text-blue-600 p-1 rounded bg-teal-200">User</a>
         </div>
-    @endif
-    <hr>
-    {{ $slot }}
+            @foreach ($errors->all() as $error => $message)
+                <div class="text-red-500 bg-slate-300 rounded-md flex justify-center mt-2 p-1">
+                    {{$message}}
+                </div>
+            @endforeach
+    </div>
+    <div class="p-2">
+        {{ $slot }}
+    </div>
 </body>
 </html>

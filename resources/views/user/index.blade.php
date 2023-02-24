@@ -1,11 +1,11 @@
 <x-layout>
-    <h2>User</h2>
+    <h2 class="flex justify-center text-xl font-bold p-5">User</h2>
 
-    <form action="/user" method="post">
+    <form action="/user" method="post" class="p-3 rounded bg-yellow-100 text-center">
         @csrf
         @method('POST')
         
-        <table>
+        <table class="mx-auto pb-2">
             <tr>
                 <th>Name</th>
                 <th>Role</th>
@@ -21,12 +21,12 @@
                 </td>
             </tr>
         </table>
-        <input type="submit" value="Create User">
+        <input class="p-1 bg-blue-200 rounded" type="submit" value="Create User">
     </form>
 
     <hr>
 
-    <table>
+    <table class="mx-auto my-2 p-3 bg-green-100 rounded text-center">
         <tr>
             <th>
                 Name
@@ -47,7 +47,7 @@
                     {{$user->role}}
                 </td>
                 <td>
-                    <form action="/user/{{$user->id}}" method="post">
+                    <form action="/user/{{$user->id}}" method="post" class="bg-red-100 rounded p-1">
                     @csrf
                     @method('DELETE')
 

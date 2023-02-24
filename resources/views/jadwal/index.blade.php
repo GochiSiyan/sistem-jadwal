@@ -1,8 +1,8 @@
 <x-layout>
-    <h2>Jadwal Mengajar</h2>
+    <h2 class="flex justify-center text-xl font-bold p-5">Jadwal Mengajar</h2>
 
-    <form action="/jadwal" method="get" class="p-3">
-        <table>
+    <form action="/jadwal" method="get" class="p-3 rounded bg-yellow-100 text-center">
+        <table class="mx-auto pb-2">
             <tr>
                 <th>
                     Hari/tgl
@@ -13,10 +13,10 @@
             </tr>
             <tr>
                 <td>
-                    <input type="date" name="haritgl" id="haritgl" value="{{$_GET['haritgl'] ?? null}}">
+                    <input type="date" class="rounded bg-gray-300" name="haritgl" id="haritgl" value="{{$_GET['haritgl'] ?? null}}">
                 </td>
                 <td>
-                    <select name="pengajar" id="pengajar">
+                    <select name="pengajar" id="pengajar" class="rounded bg-gray-300">
                         <option value="">Select Teacher</option>
                         @foreach ($teachers as $teacher)
                             <option value="{{$teacher->id}}" {{(($_GET['pengajar'] ?? null) == $teacher->id) ? "selected" : ''}}>{{$teacher->name}}</option>
@@ -25,12 +25,12 @@
                 </td>
             </tr>
         </table>
-        <input type="submit" value="Filter">
-        <a href="/jadwal">Reset</a>
+        <input type="submit" value="Filter" class="p-1 bg-blue-200 rounded">
+        <a href="/jadwal" class="p-1 bg-red-200 rounded">Reset</a>
     </form>
 
     @if ($jadwals->total())
-    <table>
+    <table class="mx-auto my-2 p-3 bg-green-100 rounded text-center">
         <tr>
             <th>Student</th>
             <th>Teacher</th>
@@ -57,7 +57,7 @@
                     {{$jadwal->room}}
                 </td>
                 <td>
-                    <form action="/jadwal/{{$jadwal->id}}" method="post">
+                    <form action="/jadwal/{{$jadwal->id}}" method="post" class="bg-red-100 rounded p-1">
                         @csrf
                         @method('DELETE')
 
@@ -68,16 +68,16 @@
         @endforeach
     </table>
     @else
-        <p>NO DATA. Please use another filter</p>
+        <div class="mx-auto my-2 p-3 bg-green-100 rounded text-center">
+            <p>NO DATA. Please use another filter</p>
+        </div>
     @endif
 
     <div class="pagination">
         {{$jadwals->links()}}
     </div>
 
-    <hr>
-
-    <form action="/jadwal" method="post">
+    <form action="/jadwal" method="post" class="bg-blue-100 rounded p-3">
         @csrf
         @method('POST')
 
@@ -135,7 +135,7 @@
                     </select>
                 </td>
                 <td>
-                    <input type="submit" value="Add">
+                    <input type="submit" value="Add" class="rounded p-1 bg-green-200 border-green-800 border">
                 </td>
             </tr>
         </table>
