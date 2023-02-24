@@ -1,0 +1,19 @@
+there will be user account with pass
+
+there is privelage,
+student
+teacher
+admin
+
+there is time and studio usage
+
+create login and register system
+
+DATABASE LIST
+user table | id name email pass date-register nick privelage
+schedule table | id room teacher student from length date-time
+
+utilize database seeder
+utilize database migrate
+
+create reset feature so the site can be reseted from the admin panel
