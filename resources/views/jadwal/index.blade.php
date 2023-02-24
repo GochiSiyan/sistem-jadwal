@@ -120,10 +120,10 @@
                 </td>
                 <td>
                     <select name="time" id="time">
-                        <option value="003000">30 Minutes</option>
-                        <option value="010000">1 Hour</option>
-                        <option value="013000">1.5 Hours</option>
-                        <option value="020000">2 Hours</option>
+                        <option value="00:30:00">30 Minutes</option>
+                        <option value="01:00:00">1 Hour</option>
+                        <option value="01:30:00">1.5 Hours</option>
+                        <option value="02:00:00">2 Hours</option>
                     </select>
                 </td>
                 <td>

@@ -20,13 +20,12 @@ class JadwalMusikController extends Controller
         if ($_GET['pengajar'] ?? false) $data = $data->where('jadwal_musiks.teacher_id', '=', $_GET['pengajar']);
         if ($_GET['haritgl'] ?? false) $data = $data->whereDate('jadwal_musiks.from', '=', $_GET['haritgl']);
 
+        // dd($data
+        // ->latest('jadwal_musiks.from')
+        // ->paginate(10));
+
         return view('jadwal.index', [
             'jadwals' => $data
-                // ->select(['jadwal_musiks.id', 'jadwal_musiks.teacher_id', 'jadwal_musiks.student_id', 'jadwal_musiks.from', 'jadwal_musiks.length', 'jadwal_musiks.room', 'teacher.name as teacher', 'student.name as student'])
-                // ->join('users as teacher', 'jadwal_musiks.teacher_id', '=', 'teacher.id')
-                // ->join('users as student', 'jadwal_musiks.student_id', '=', 'student.id')
-                // ->whereDate('jadwal_musiks.from', '=', $_GET['haritgl'] ?? null)
-                // ->where('jadwal_musiks.teacher_id', '=', $_GET['pengajar'] ?? null)
                 ->latest('jadwal_musiks.from')
                 ->paginate(10),
             'students' => $users = DB::table('users')->select(['id', 'name'])->where('role', 'student')->get(),
@@ -53,14 +52,14 @@ class JadwalMusikController extends Controller
             ->get();
         $start = $request['from-date'] . ' ' . $request['from-time'];
         $end = Carbon::parse($start);
-        $time = str_split($request['time'], 2);
+        $time = explode(':', $request['time']);
         $end->add('hour', $time[0])->add('minute', $time[1]);
         $range = CarbonPeriod::create($start, $end);
 
         foreach($jadwals as $jadwal) {
             $cstart = $jadwal->from;
             $cend = Carbon::parse($cstart);
-            $ctime = str_split($jadwal->length, 2);
+            $ctime = explode(':', $jadwal->length);
             $cend->add('hour', $ctime[0])->add('minute', $ctime[1]);
             $crange = CarbonPeriod::create($cstart, $cend);
             // make sure the time range do not overlap with other time of that teacher schedule
@@ -82,7 +81,7 @@ class JadwalMusikController extends Controller
             foreach($jadwals as $jadwal) {
                 $cstart = $jadwal->from;
                 $cend = Carbon::parse($cstart);
-                $ctime = str_split($jadwal->length, 2);
+                $ctime = explode(':', $jadwal->length);
                 $cend->add('hour', $ctime[0])->add('minute', $ctime[1]);
                 $crange = CarbonPeriod::create($cstart, $cend);
                 // make sure the time range do not overlap with other time of that teacher schedule
@@ -101,7 +100,7 @@ class JadwalMusikController extends Controller
                 foreach($jadwals as $jadwal) {
                     $cstart = $jadwal->from;
                     $cend = Carbon::parse($cstart);
-                    $ctime = str_split($jadwal->length, 2);
+                    $ctime = explode(':', $jadwal->length);
                     $cend->add('hour', $ctime[0])->add('minute', $ctime[1]);
                     $crange = CarbonPeriod::create($cstart, $cend);
                     // make sure the time range do not overlap with other time of that teacher schedule
